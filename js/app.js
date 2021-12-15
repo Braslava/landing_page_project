@@ -23,7 +23,6 @@
  *
  */
 const sections = document.querySelectorAll('section');
-//const navBarMenu = document.querySelector('.navbar__menu');
 const navList = document.querySelector('#navbar__list');
 const footer = document.querySelector('.page__footer');
 const scrollUpButton = document.querySelector('.btn--scroll-up');
@@ -87,7 +86,6 @@ function handleNavItemClick(event) {
 	if (event.target.nodeName === 'A') {
 		linkedSection = document.getElementById(event.target.classList[1]);
 		linkedSection.scrollIntoView();
-		//console.log(linkedSection);
 	} 
 	return;
 }
