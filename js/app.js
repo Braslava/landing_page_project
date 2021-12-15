@@ -23,9 +23,8 @@
  *
  */
 const sections = document.querySelectorAll('section');
-const mainContainer = document.querySelector('main');
-const navBarMenu = document.querySelector('.navbar__menu');
-const navList = navBarMenu.querySelector('#navbar__list');
+//const navBarMenu = document.querySelector('.navbar__menu');
+const navList = document.querySelector('#navbar__list');
 const footer = document.querySelector('.page__footer');
 const scrollUpButton = document.querySelector('.btn--scroll-up');
 const scrollUpButtonWrapper = document.querySelector('.scroll-up-btn-wrapper');
@@ -36,11 +35,7 @@ const scrollUpButtonWrapper = document.querySelector('.scroll-up-btn-wrapper');
  *
  */
 
-function handleNavItemClick(event) {
-	event.preventDefault();
-}
-
-// Finds navigation item that corresponds to a section 
+// Finds navigation item that corresponds to a section
 function findActiveNavLink(section) {
 	return navList.querySelector(`.${section.id}`);
 }
@@ -87,6 +82,16 @@ function addActiveClass(entries) {
 
 // Scroll to anchor ID using scrollTO event
 
+function handleNavItemClick(event) {
+	event.preventDefault();
+	if (event.target.nodeName === 'A') {
+		linkedSection = document.getElementById(event.target.classList[1]);
+		linkedSection.scrollIntoView();
+		//console.log(linkedSection);
+	} 
+	return;
+}
+
 /**
  * End Main Functions
  * Begin Events
@@ -97,6 +102,7 @@ function addActiveClass(entries) {
 sections.forEach((section) => builNavItem(section));
 
 // Scroll to section on link click
+navList.addEventListener('click', handleNavItemClick);
 
 // Set sections as active
 
