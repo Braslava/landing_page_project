@@ -26,6 +26,9 @@ const sections = document.querySelectorAll('section');
 const mainContainer = document.querySelector('main');
 const navBarMenu = document.querySelector('.navbar__menu');
 const navList = navBarMenu.querySelector('#navbar__list');
+const footer = document.querySelector('.page__footer');
+const scrollUpButton = document.querySelector('.btn--scroll-up');
+const scrollUpButtonWrapper = document.querySelector('.scroll-up-btn-wrapper');
 
 /**
  * End Global Variables
@@ -37,8 +40,17 @@ function handleNavItemClick(event) {
 	event.preventDefault();
 }
 
+// Finds navigation item that corresponds to a section 
 function findActiveNavLink(section) {
 	return navList.querySelector(`.${section.id}`);
+}
+
+function scrollToTop() {
+	window.scrollTo({
+		top: 0,
+		left: 0,
+		behavior: 'smooth',
+	});
 }
 
 /**
@@ -48,17 +60,16 @@ function findActiveNavLink(section) {
  */
 
 // build the nav
-// use a loop to create a navigation list item from each of the section data attributes
-sections.forEach((section) => {
+function builNavItem(section) {
 	const navItem = document.createElement('li');
-	navItemLink = document.createElement('a');
+	const navItemLink = document.createElement('a');
 	navItemLink.innerText = section.dataset.nav;
 	navItemLink.classList.add('menu__link');
 	navItemLink.classList.add(section.id);
 	navItemLink.href = '#' + section.id;
 	navItem.appendChild(navItemLink);
 	navList.appendChild(navItem);
-});
+}
 
 // Add class 'active' to section when near top of viewport
 
@@ -74,17 +85,6 @@ function addActiveClass(entries) {
 	});
 }
 
-const options = {
-	threshold: 0.5,
-	rootMargin: '-6%',
-};
-
-const activeSectionObserver = new IntersectionObserver(addActiveClass, options);
-
-sections.forEach((section) => {
-	activeSectionObserver.observe(section);
-});
-
 // Scroll to anchor ID using scrollTO event
 
 /**
@@ -94,24 +94,29 @@ sections.forEach((section) => {
  */
 
 // Build menu
+sections.forEach((section) => builNavItem(section));
 
 // Scroll to section on link click
 
 // Set sections as active
 
-// Scroll back to top when reaches the footer 
+const activeSectionObserver = new IntersectionObserver(addActiveClass, {
+	threshold: 0.5,
+	rootMargin: '-6%',
+});
 
-const footer = document.querySelector('.page__footer');
-const scrollUpButton = document.querySelector('.btn--scroll-up');
-const scrollUpButtonWrapper = document.querySelector('.scroll-up-btn-wrapper');
+sections.forEach((section) => {
+	activeSectionObserver.observe(section);
+});
+
+// Scroll back to top when reaches the footer
 
 function reachedBotttom(entry) {
-    if(entry[0].isIntersecting){
-        scrollUpButtonWrapper.classList.add('inView');
-    }	
-    else {
-        scrollUpButtonWrapper.classList.remove('inView');
-    }
+	if (entry[0].isIntersecting) {
+		scrollUpButtonWrapper.classList.add('inView');
+	} else {
+		scrollUpButtonWrapper.classList.remove('inView');
+	}
 }
 
 const reachedBottomObserver = new IntersectionObserver(reachedBotttom, {
@@ -120,13 +125,6 @@ const reachedBottomObserver = new IntersectionObserver(reachedBotttom, {
 
 reachedBottomObserver.observe(footer);
 
-// Add event and return to the top when the button is clicked 
-function scrollToTop(){
-    window.scrollTo({
-        top: 0,  
-        left: 0,
-        behavior: "smooth"
-    });
-}
+// Add event and return to the top when the button is clicked
 
-scrollUpButton.addEventListener('click', scrollToTop); 
+scrollUpButton.addEventListener('click', scrollToTop);
