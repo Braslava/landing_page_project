@@ -86,7 +86,7 @@ function handleNavItemClick(event) {
 	if (event.target.nodeName === 'A') {
 		linkedSection = document.getElementById(event.target.classList[1]);
 		linkedSection.scrollIntoView();
-	} 
+	}
 	return;
 }
 
@@ -132,3 +132,23 @@ reachedBottomObserver.observe(footer);
 // Add event and return to the top when the button is clicked
 
 scrollUpButton.addEventListener('click', scrollToTop);
+
+/**
+ * Navigation toggle for mobile devices
+ *
+ */
+
+const primaryNav = document.querySelector('.navbar__menu');
+const navToggle = document.querySelector('.navbar__toggle');
+
+navToggle.addEventListener('click', () => {
+	const visibility = primaryNav.getAttribute('data-visible');
+
+	if (visibility === 'false') {
+		primaryNav.setAttribute('data-visible', true);
+		navToggle.setAttribute('aria-expanded', true);
+	} else {
+		primaryNav.setAttribute('data-visible', false);
+		navToggle.setAttribute('aria-expanded', false);
+	}
+});

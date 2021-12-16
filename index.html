@@ -16,10 +16,13 @@
   <!-- HTML Follows BEM naming conventions 
   IDs are only used for sections to connect menu achors to sections -->
   <header class="page__header">
-    <nav class="navbar__menu">
+    <nav class="navbar__menu" id="primary-navigation" data-visible="false">
       <!-- Navigation starts as empty UL that will be populated with JS -->
       <ul id="navbar__list"></ul>
     </nav>
+    <button class="navbar__toggle" aria-controls="primary-navigation" aria-expanded="false">
+      <span class="sr-only">Menu</span>
+    </button>
   </header>
   <main class="landing-page__main">
     <header class="main__hero">

@@ -99,10 +99,80 @@ section {
 	transition: ease 0.3s all;
 }
 
+/* Hides element but it remains accesible for assstive devices*/
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
 .active {
 	background: #333;
 	color: #fff;
 	transition: ease 0.3s all;
+}
+
+.navbar__toggle {
+	position: absolute;
+	display: none;
+}
+
+@media only screen and (max-width: 45em) {
+	.navbar__menu {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
+		inset: 0 0 0 30%;
+		background-color: rgba(248, 240, 240, 0.8);
+		backdrop-filter: blur(1rem);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transform: translateX(100%);
+		transition: transform 500ms ease-in-out;
+		padding: 2rem;
+	}
+
+	.navbar__menu[data-visible='true'] {
+		transform: translateX(0%);
+	}
+
+	.navbar__menu li {
+		display: flex;
+		margin-bottom: 1rem;
+	}
+
+	.navbar__menu .menu__link {
+		text-align: center;
+	}
+
+	.navbar__toggle {
+		position: absolute;
+		display: block;
+		position: absolute;
+		background: url('/assets/bars-solid.svg');
+		background-repeat: no-repeat;
+		z-index: 199;
+		width: 2rem;
+		aspect-ratio: 1;
+		border: none;
+		top: 1rem;
+		right: 1rem;
+	}
+
+	.navbar__toggle[aria-expanded='true'] {
+		background: url('/assets/times-solid.svg');
+		background-repeat: no-repeat;
+	}
 }
 
 /* Header Styles */

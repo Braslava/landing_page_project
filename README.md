@@ -8,4 +8,5 @@ This project:
 
 -   programmatically builds navigation,
 -   scrolls to anchors from navigation,
--   highlights section in viewport upon scrolling.
+-   highlights section in viewport upon scrolling,
+-   has responsibe navigation bar style.
