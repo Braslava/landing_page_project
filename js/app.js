@@ -1,22 +1,4 @@
-/**
- *
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- *
- * Dependencies: None
- *
- * JS Version: ES2015/ES6
- *
- * JS Standard: ESlint
- *
- */
 
-/**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
- */
 
 /**
  * Define Global Variables
@@ -27,6 +9,8 @@ const navList = document.querySelector('#navbar__list');
 const footer = document.querySelector('.page__footer');
 const scrollUpButton = document.querySelector('.btn--scroll-up');
 const scrollUpButtonWrapper = document.querySelector('.scroll-up-btn-wrapper');
+const primaryNav = document.querySelector('.navbar__menu');
+const navToggle = document.querySelector('.navbar__toggle');
 
 /**
  * End Global Variables
@@ -47,6 +31,18 @@ function scrollToTop() {
 	});
 }
 
+// handling navbar on mobile-size screens
+
+function showNavBar(navBar, toggleBtn) {
+	navBar.setAttribute('data-visible', true);
+	toggleBtn.setAttribute('aria-expanded', true);
+}
+
+function hideNavBar(navBar, toggleBtn) {
+	navBar.setAttribute('data-visible', false);
+	toggleBtn.setAttribute('aria-expanded', false);
+}
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -54,7 +50,7 @@ function scrollToTop() {
  */
 
 // build the nav
-function builNavItem(section) {
+function buildNavItem(section) {
 	const navItem = document.createElement('li');
 	const navItemLink = document.createElement('a');
 	navItemLink.innerText = section.dataset.nav;
@@ -85,7 +81,9 @@ function handleNavItemClick(event) {
 	event.preventDefault();
 	if (event.target.nodeName === 'A') {
 		linkedSection = document.getElementById(event.target.classList[1]);
-		linkedSection.scrollIntoView();
+		linkedSection.scrollIntoView({behavior: 'smooth'});
+		// hides the navbar if on smaller screens 
+		hideNavBar(primaryNav, navToggle); 
 	}
 	return;
 }
@@ -97,7 +95,7 @@ function handleNavItemClick(event) {
  */
 
 // Build menu
-sections.forEach((section) => builNavItem(section));
+sections.forEach((section) => buildNavItem(section));
 
 // Scroll to section on link click
 navList.addEventListener('click', handleNavItemClick);
@@ -138,17 +136,13 @@ scrollUpButton.addEventListener('click', scrollToTop);
  *
  */
 
-const primaryNav = document.querySelector('.navbar__menu');
-const navToggle = document.querySelector('.navbar__toggle');
+// expand/collapse when the open/close button is clicked
 
 navToggle.addEventListener('click', () => {
-	const visibility = primaryNav.getAttribute('data-visible');
-
-	if (visibility === 'false') {
-		primaryNav.setAttribute('data-visible', true);
-		navToggle.setAttribute('aria-expanded', true);
+	const navVisibility = primaryNav.getAttribute('data-visible');
+	if (navVisibility === 'false') {
+		showNavBar(primaryNav, navToggle)
 	} else {
-		primaryNav.setAttribute('data-visible', false);
-		navToggle.setAttribute('aria-expanded', false);
+		hideNavBar(primaryNav, navToggle); 
 	}
 });

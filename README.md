@@ -10,3 +10,9 @@ This project:
 -   scrolls to anchors from navigation,
 -   highlights section in viewport upon scrolling,
 -   has responsibe navigation bar style.
+
+Dependencies: None
+
+JS Version: ES2015/ES6
+
+JS Standard: ESlint
