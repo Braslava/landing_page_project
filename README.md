@@ -11,6 +11,8 @@ This project:
 -   highlights section in viewport upon scrolling,
 -   has responsibe navigation bar style.
 
+CSS written based on SMACSS architecture. BEM is used in naming classes. 
+
 Dependencies: None
 
 JS Version: ES2015/ES6

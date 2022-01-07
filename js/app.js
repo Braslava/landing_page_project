@@ -131,12 +131,7 @@ reachedBottomObserver.observe(footer);
 
 scrollUpButton.addEventListener('click', scrollToTop);
 
-/**
- * Navigation toggle for mobile devices
- *
- */
-
-// expand/collapse when the open/close button is clicked
+// for small screens only: expand/collapse navigation when the open/close button is clicked
 
 navToggle.addEventListener('click', () => {
 	const navVisibility = primaryNav.getAttribute('data-visible');
