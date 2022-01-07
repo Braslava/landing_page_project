@@ -152,7 +152,7 @@ section {
 		position: absolute;
 		display: block;
 		position: absolute;
-		background: url('/assets/bars-solid.svg');
+		background: url('../assets/bars-solid.svg');
 		background-repeat: no-repeat;
 		z-index: 199;
 		width: 2rem;
@@ -163,7 +163,7 @@ section {
 	}
 
 	.navbar__toggle[aria-expanded='true'] {
-		background: url('/assets/times-solid.svg');
+		background: url('../assets/times-solid.svg');
 		background-repeat: no-repeat;
 	}
 }
